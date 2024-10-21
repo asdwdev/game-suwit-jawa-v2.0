@@ -28,12 +28,14 @@ function putar() {
 }
 
 const pilihan = document.querySelectorAll('li img');
+let skorPlayer = 0;
+let skorKomputer = 0;
+
 pilihan.forEach(function(pil) {
     pil.addEventListener('click', function() {
         const pilihanComputer = getPilihanComputer();
         const pilihanPlayer = pil.className; 
         const hasil = getHasil(pilihanComputer, pilihanPlayer);
-
         putar();
 
         setTimeout(function() {
@@ -42,6 +44,18 @@ pilihan.forEach(function(pil) {
     
             const info = document.querySelector('.info');
             info.innerHTML = hasil;
+
+            if(hasil === 'MENANG!') {
+                skorPlayer += 1; 
+            } else if (hasil === 'KALAH!') {
+                skorKomputer += 1;
+            }
+
+            // Update tampilan skor
+            const skorPlayerDisplay = document.querySelector('.skorPlayer span'); 
+            const skorKomputerDisplay = document.querySelector('.skorKomputer span'); 
+            skorPlayerDisplay.innerHTML = skorPlayer; 
+            skorKomputerDisplay.innerHTML = skorKomputer; 
         }, 1000);   
     });
 });
